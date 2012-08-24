@@ -152,12 +152,18 @@
 		</li>
 
 		<li>
-			<span class="m-dotted" id="example6">AJAX-загрузка окна</span>
+			<span class="m-dotted" id="example6">AJAX-загрузка окна</span> и события afterLoading и afterLoadingOnShow
 			<script>
 				$('#example6').click(function() {
 					$.arcticmodal({
 						type: 'ajax',
-						url: 'ajax_example.html'
+						url: 'ajax_example.html',
+						afterLoading: function(data, el) {
+							alert('afterLoading');
+						},
+						afterLoadingOnShow: function(data, el) {
+							alert('afterLoadingOnShow');
+						}
 					});
 				});
 			</script>
