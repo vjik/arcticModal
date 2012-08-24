@@ -60,6 +60,7 @@
 		beforeClose: $.noop,
 		afterClose: $.noop,
 		afterLoading: $.noop,
+		afterLoadingOnShow: $.noop,
 		errorLoading: $.noop
 
 	};
@@ -178,7 +179,7 @@
 				},
 				success: function(responce) {
 
-					// Событие после загрузки
+					// Событие после загрузки до показа содержимого
 					$this.trigger('afterLoading');
 					D.afterLoading(D, $this, responce);
 
@@ -188,6 +189,11 @@
 						fn_success(D, $this, responce);
 					}
 					modal.prepare_body(D, $this);
+
+					// Событие после загрузки после отображения содержимого
+					$this.trigger('afterLoadingOnShow');
+					D.afterLoadingOnShow(D, $this, responce);
+
 				},
 				error: function() {
 
