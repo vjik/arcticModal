@@ -1,7 +1,7 @@
 /*
 
 	arcticModal — jQuery plugin
-	Version: 0.1
+	Version: 0.1.1
 	Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
 	Company: Arctic Laboratory (http://arcticlab.ru/)
 
@@ -134,7 +134,7 @@
 
 			// BODY
 			D.body = $('.arcticmodal-container_i2', D.container.block);
-			D.body.html($this.clone(true));
+			D.body.html($this);
 
 			// Подготовка содержимого
 			modal.prepare_body(D, $this);
@@ -295,7 +295,12 @@
 				D.afterOpen(D, $this);
 				$this.trigger('afterOpen');
 			});
-
+			var oldBodyOuterWidth = $('body').outerWidth(true);
+			var oldScrollTop = $('html').scrollTop();
+			$('html').css('overflow-y', 'hidden');
+			newBodyOuterWidth = $('body').outerWidth(true);
+			$('body').css('margin-right', (newBodyOuterWidth - oldBodyOuterWidth) + 'px');
+			$('html').scrollTop(oldScrollTop); // necessary for Firefox
 			return $this;
 		},
 
@@ -329,10 +334,13 @@
 
 						D.overlay.block.remove();
 						D.container.block.remove();
+						$this.appendTo('BODY').hide();
 						$this.data('arcticmodal', null);
 						if (!$('.arcticmodal-container').length)
 							if (D.wrap.data('arcticmodalOverflow'))
 								D.wrap.css('overflow', D.wrap.data('arcticmodalOverflow'));
+								$('html').css('overflow-y', 'auto');
+								$('body').css('margin-right', 'auto');
 					});
 
 					if (D.type=='ajax')
@@ -373,6 +381,4 @@
 		}
 
 	};
-
-
 })(jQuery);
