@@ -134,7 +134,7 @@
 
 			// BODY
 			D.body = $('.arcticmodal-container_i2', D.container.block);
-			D.body.html($this.clone(true));
+			D.body.html($this);
 
 			// Подготовка содержимого
 			modal.prepare_body(D, $this);
@@ -334,6 +334,7 @@
 
 						D.overlay.block.remove();
 						D.container.block.remove();
+						$this.appendTo('BODY').hide();
 						$this.data('arcticmodal', null);
 						if (!$('.arcticmodal-container').length)
 							if (D.wrap.data('arcticmodalOverflow'))
