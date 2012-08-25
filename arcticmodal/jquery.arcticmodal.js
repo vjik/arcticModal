@@ -1,7 +1,7 @@
 /*
 
 	arcticModal — jQuery plugin
-	Version: 0.1
+	Version: 0.1.1
 	Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
 	Company: Arctic Laboratory (http://arcticlab.ru/)
 
@@ -381,6 +381,4 @@
 		}
 
 	};
-
-
 })(jQuery);
