@@ -295,7 +295,12 @@
 				D.afterOpen(D, $this);
 				$this.trigger('afterOpen');
 			});
-
+			var oldBodyOuterWidth = $('body').outerWidth(true);
+			var oldScrollTop = $('html').scrollTop();
+			$('html').css('overflow-y', 'hidden');
+			newBodyOuterWidth = $('body').outerWidth(true);
+			$('body').css('margin-right', (newBodyOuterWidth - oldBodyOuterWidth) + 'px');
+			$('html').scrollTop(oldScrollTop); // necessary for Firefox
 			return $this;
 		},
 
@@ -333,6 +338,8 @@
 						if (!$('.arcticmodal-container').length)
 							if (D.wrap.data('arcticmodalOverflow'))
 								D.wrap.css('overflow', D.wrap.data('arcticmodalOverflow'));
+								$('html').css('overflow-y', 'auto');
+								$('body').css('margin-right', 'auto');
 					});
 
 					if (D.type=='ajax')
