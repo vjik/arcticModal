@@ -296,7 +296,7 @@
 				D.wrap.css('overflow', 'hidden');
 				var w2 = D.wrap.outerWidth(true);
 				if (w2!=w1)
-					$('BODY').css('marginRight', (w2 - w1) + 'px');
+					D.wrap.css('marginRight', (w2 - w1) + 'px');
 			}
 
 			// Показать
@@ -343,7 +343,7 @@
 						if (!$('.arcticmodal-container').length) {
 							if (D.wrap.data('arcticmodalOverflow'))
 								D.wrap.css('overflow', D.wrap.data('arcticmodalOverflow'));
-							$('BODY').css('marginRight', 0);
+							D.wrap.css('marginRight', 0);
 						}
 
 					});
