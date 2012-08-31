@@ -40,8 +40,6 @@
 		wrap: undefined,
 		body: undefined,
 
-		scrollWidth: 0, // Ширина скролла
-
 		errors: {
 			tpl: '<div class="arcticmodal-error arcticmodal-close"></div>',
 			autoclose_delay: 2000,
@@ -298,7 +296,7 @@
 				D.wrap.css('overflow', 'hidden');
 				var w2 = D.wrap.outerWidth(true);
 				if (w2!=w1)
-					$('BODY').css('marginRight', D.scrollWidth + 'px');
+					$('BODY').css('marginRight', (w2 - w1) + 'px');
 			}
 
 			// Показать
@@ -364,13 +362,6 @@
 
 	$(function() {
 		default_options.wrap = $((document.all && !document.querySelector) ? 'html' : 'body');
-
-		// detect scrollbar width
-		var div = $('<div style="width:50px;height:50px;overflow:scroll;position:absolute;top:-200px;left:-200px;"><div/></div>');
-		$('body').append(div);
-		default_options.scrollWidth = div.width() - $('div', div).width();
-		div.remove();
-
 	});
 
 
