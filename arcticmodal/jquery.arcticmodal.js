@@ -354,6 +354,12 @@
 					modals = modals.not($this);
 				});
 			}
+		},
+
+
+		// Установить опции по-умолчанию
+		setDefault: function(options) {
+			$.extend(true, default_options, options);
 		}
 
 
