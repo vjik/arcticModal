@@ -213,7 +213,7 @@
 								$this.arcticmodal('close');
 							}, D.errors.autoclose_delay);
 					} else {
-						fn_success(D, $this);
+						fn_error(D, $this);
 					}
 				}
 			}, D.ajax);
