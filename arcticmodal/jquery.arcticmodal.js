@@ -280,8 +280,8 @@
 			}
 
 			// Добавить overlay и container
-			D.overlay.block.css('zIndex', default_options.zIndex++).hide();
-			D.container.block.css('zIndex', default_options.zIndex++).hide();
+			D.overlay.block.css('zIndex', D.zIndex++).hide();
+			D.container.block.css('zIndex', D.zIndex++).hide();
 			$('BODY').append(D.overlay.block);
 			$('BODY').append(D.container.block);
 
@@ -329,7 +329,7 @@
 					if (D.beforeClose(D, $this)===false) return;
 					$this.trigger('beforeClose');
 
-					default_options.zIndex = default_options.zIndex - 2;
+					D.zIndex = D.zIndex - 2;
 					modal.transition(D.overlay.block, 'hide', D.closeEffect);
 					modal.transition(D.container.block, 'hide', D.closeEffect, function() {
 
