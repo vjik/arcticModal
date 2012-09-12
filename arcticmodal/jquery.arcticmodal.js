@@ -13,7 +13,6 @@
 
 	var default_options = {
 
-		zIndex: 1000, // Базовый z-index
 		type: 'html', // ajax или html
 		content: '',
 		url: '',
@@ -280,8 +279,8 @@
 			}
 
 			// Добавить overlay и container
-			D.overlay.block.css('zIndex', D.zIndex++).hide();
-			D.container.block.css('zIndex', D.zIndex++).hide();
+			D.overlay.block.hide();
+			D.container.block.hide();
 			$('BODY').append(D.overlay.block);
 			$('BODY').append(D.container.block);
 
@@ -299,9 +298,15 @@
 					D.wrap.css('marginRight', (w2 - w1) + 'px');
 			}
 
+			// Скрыть предыдущие оверлеи
+			modals.not($this).each(function() {
+				var d = $(this).data('arcticmodal');
+				d.overlay.block.hide();
+			});
+
 			// Показать
-			modal.transition(D.container.block, 'show', D.openEffect);
-			modal.transition(D.overlay.block, 'show', D.openEffect, function() {
+			modal.transition(D.overlay.block, 'show', modals.length>1 ? {type: 'none'} : D.openEffect);
+			modal.transition(D.container.block, 'show', modals.length>1 ? {type: 'none'} : D.openEffect, function() {
 				D.afterOpen(D, $this);
 				$this.trigger('afterOpen');
 			});
@@ -329,9 +334,14 @@
 					if (D.beforeClose(D, $this)===false) return;
 					$this.trigger('beforeClose');
 
-					D.zIndex = D.zIndex - 2;
-					modal.transition(D.overlay.block, 'hide', D.closeEffect);
-					modal.transition(D.container.block, 'hide', D.closeEffect, function() {
+					// Показать предыдущие оверлеи
+					modals.not($this).last().each(function() {
+						var d = $(this).data('arcticmodal');
+						d.overlay.block.show();
+					});
+
+					modal.transition(D.overlay.block, 'hide', modals.length>1 ? {type: 'none'} : D.closeEffect);
+					modal.transition(D.container.block, 'hide', modals.length>1 ? {type: 'none'} : D.closeEffect, function() {
 
 						// Событие после закрытия
 						D.afterClose(D, $this);
