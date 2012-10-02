@@ -1,11 +1,11 @@
 /*
 
-	arcticModal — jQuery plugin
-	Version: 0.1
-	Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
-	Company: Arctic Laboratory (http://arcticlab.ru/)
+ arcticModal — jQuery plugin
+ Version: 0.1
+ Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
+ Company: Arctic Laboratory (http://arcticlab.ru/)
 
-	Docs & Examples: http://arcticlab.ru/arcticmodal/
+ Docs & Examples: http://arcticlab.ru/arcticmodal/
 
  */
 (function($) {
@@ -13,7 +13,6 @@
 
 	var default_options = {
 
-		zIndex: 1000, // Базовый z-index
 		type: 'html', // ajax или html
 		content: '',
 		url: '',
@@ -22,6 +21,8 @@
 
 		closeOnEsc: true,
 		closeOnOverlayClick: true,
+
+		clone: false,
 
 		overlay: {
 			block: undefined,
@@ -60,11 +61,13 @@
 		beforeClose: $.noop,
 		afterClose: $.noop,
 		afterLoading: $.noop,
+		afterLoadingOnShow: $.noop,
 		errorLoading: $.noop
 
 	};
 
 
+	var modalID = 0;
 	var modals = $();
 
 
@@ -106,9 +109,6 @@
 		// Подготвка содержимого окна
 		prepare_body: function(D, $this) {
 
-			// Показать содержимое
-			$('>*', D.body).show();
-
 			// Обработчик закрытия
 			$('.arcticmodal-close', D.body).click(function() {
 				$this.arcticmodal('close');
@@ -124,6 +124,8 @@
 			if (D) return;
 
 			D = options;
+			modalID++;
+			D.modalID = modalID;
 
 			// Overlay
 			D.overlay.block = $(D.overlay.tpl);
@@ -134,7 +136,12 @@
 
 			// BODY
 			D.body = $('.arcticmodal-container_i2', D.container.block);
-			D.body.html($this.clone(true));
+			if (options.clone) {
+				D.body.html($this.clone(true));
+			} else {
+				$this.before('<div id="arcticmodalReserve' + D.modalID + '" style="display: none" />');
+				D.body.html($this);
+			}
 
 			// Подготовка содержимого
 			modal.prepare_body(D, $this);
@@ -178,7 +185,7 @@
 				},
 				success: function(responce) {
 
-					// Событие после загрузки
+					// Событие после загрузки до показа содержимого
 					$this.trigger('afterLoading');
 					D.afterLoading(D, $this, responce);
 
@@ -188,6 +195,11 @@
 						fn_success(D, $this, responce);
 					}
 					modal.prepare_body(D, $this);
+
+					// Событие после загрузки после отображения содержимого
+					$this.trigger('afterLoadingOnShow');
+					D.afterLoadingOnShow(D, $this, responce);
+
 				},
 				error: function() {
 
@@ -207,7 +219,7 @@
 								$this.arcticmodal('close');
 							}, D.errors.autoclose_delay);
 					} else {
-						fn_success(D, $this);
+						fn_error(D, $this);
 					}
 				}
 			}, D.ajax);
@@ -274,8 +286,8 @@
 			}
 
 			// Добавить overlay и container
-			D.overlay.block.css('zIndex', default_options.zIndex++).hide();
-			D.container.block.css('zIndex', default_options.zIndex++).hide();
+			D.overlay.block.hide();
+			D.container.block.hide();
 			$('BODY').append(D.overlay.block);
 			$('BODY').append(D.container.block);
 
@@ -286,12 +298,22 @@
 			// Wrap
 			if (D.wrap.css('overflow')!='hidden') {
 				D.wrap.data('arcticmodalOverflow', D.wrap.css('overflow'));
+				var w1 = D.wrap.outerWidth(true);
 				D.wrap.css('overflow', 'hidden');
+				var w2 = D.wrap.outerWidth(true);
+				if (w2!=w1)
+					D.wrap.css('marginRight', (w2 - w1) + 'px');
 			}
 
+			// Скрыть предыдущие оверлеи
+			modals.not($this).each(function() {
+				var d = $(this).data('arcticmodal');
+				d.overlay.block.hide();
+			});
+
 			// Показать
-			modal.transition(D.container.block, 'show', D.openEffect);
-			modal.transition(D.overlay.block, 'show', D.openEffect, function() {
+			modal.transition(D.overlay.block, 'show', modals.length>1 ? {type: 'none'} : D.openEffect);
+			modal.transition(D.container.block, 'show', modals.length>1 ? {type: 'none'} : D.openEffect, function() {
 				D.afterOpen(D, $this);
 				$this.trigger('afterOpen');
 			});
@@ -319,20 +341,32 @@
 					if (D.beforeClose(D, $this)===false) return;
 					$this.trigger('beforeClose');
 
-					default_options.zIndex = default_options.zIndex - 2;
-					modal.transition(D.overlay.block, 'hide', D.closeEffect);
-					modal.transition(D.container.block, 'hide', D.closeEffect, function() {
+					// Показать предыдущие оверлеи
+					modals.not($this).last().each(function() {
+						var d = $(this).data('arcticmodal');
+						d.overlay.block.show();
+					});
+
+					modal.transition(D.overlay.block, 'hide', modals.length>1 ? {type: 'none'} : D.closeEffect);
+					modal.transition(D.container.block, 'hide', modals.length>1 ? {type: 'none'} : D.closeEffect, function() {
 
 						// Событие после закрытия
 						D.afterClose(D, $this);
 						$this.trigger('afterClose');
 
+						// Если не клонировали - вернём на место
+						if (!D.clone)
+							$('#arcticmodalReserve' + D.modalID).replaceWith(D.body.find('>*'));
+
 						D.overlay.block.remove();
 						D.container.block.remove();
 						$this.data('arcticmodal', null);
-						if (!$('.arcticmodal-container').length)
+						if (!$('.arcticmodal-container').length) {
 							if (D.wrap.data('arcticmodalOverflow'))
 								D.wrap.css('overflow', D.wrap.data('arcticmodalOverflow'));
+							D.wrap.css('marginRight', 0);
+						}
+
 					});
 
 					if (D.type=='ajax')
@@ -341,6 +375,12 @@
 					modals = modals.not($this);
 				});
 			}
+		},
+
+
+		// Установить опции по-умолчанию
+		setDefault: function(options) {
+			$.extend(true, default_options, options);
 		}
 
 
