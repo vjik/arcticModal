@@ -1,11 +1,11 @@
 /*
 
-	arcticModal — jQuery plugin
-	Version: 0.1
-	Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
-	Company: Arctic Laboratory (http://arcticlab.ru/)
+ arcticModal — jQuery plugin
+ Version: 0.1
+ Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
+ Company: Arctic Laboratory (http://arcticlab.ru/)
 
-	Docs & Examples: http://arcticlab.ru/arcticmodal/
+ Docs & Examples: http://arcticlab.ru/arcticmodal/
 
  */
 (function($) {
@@ -21,6 +21,8 @@
 
 		closeOnEsc: true,
 		closeOnOverlayClick: true,
+
+		clone: false,
 
 		overlay: {
 			block: undefined,
@@ -65,6 +67,7 @@
 	};
 
 
+	var modalID = 0;
 	var modals = $();
 
 
@@ -106,9 +109,6 @@
 		// Подготвка содержимого окна
 		prepare_body: function(D, $this) {
 
-			// Показать содержимое
-			$('>*', D.body).show();
-
 			// Обработчик закрытия
 			$('.arcticmodal-close', D.body).click(function() {
 				$this.arcticmodal('close');
@@ -124,6 +124,8 @@
 			if (D) return;
 
 			D = options;
+			modalID++;
+			D.modalID = modalID;
 
 			// Overlay
 			D.overlay.block = $(D.overlay.tpl);
@@ -134,7 +136,12 @@
 
 			// BODY
 			D.body = $('.arcticmodal-container_i2', D.container.block);
-			D.body.html($this.clone(true));
+			if (options.clone) {
+				D.body.html($this.clone(true));
+			} else {
+				$this.before('<div id="arcticmodalReserve' + D.modalID + '" style="display: none" />');
+				D.body.html($this);
+			}
 
 			// Подготовка содержимого
 			modal.prepare_body(D, $this);
@@ -346,6 +353,10 @@
 						// Событие после закрытия
 						D.afterClose(D, $this);
 						$this.trigger('afterClose');
+
+						// Если не клонировали - вернём на место
+						if (!D.clone)
+							$('#arcticmodalReserve' + D.modalID).replaceWith(D.body.find('>*'));
 
 						D.overlay.block.remove();
 						D.container.block.remove();

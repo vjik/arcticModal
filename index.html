@@ -33,7 +33,10 @@
 
 	<!-- Документация -->
 	<h2>Документация</h2>
-	<p>Подробная документация плагина arcticModal доступна по адресу: <a href="http://arcticlab.ru/arcticmodal/">http://arcticlab.ru/arcticmodal/</a></p>
+	<p>
+		Подробная документация плагина arcticModal доступна по адресу:
+		<a href="http://arcticlab.ru/arcticmodal/">http://arcticlab.ru/arcticmodal/</a>
+	</p>
 	<!-- Документация - Конец -->
 
 
@@ -44,9 +47,11 @@
 
 		<li>
 			<span class="m-dotted" id="#example1" onclick="$('#exampleModal1').arcticmodal()">Простое модальное окно</span>
-			<div class="b-modal" id="exampleModal1">
-				<div class="b-modal_close arcticmodal-close">X</div>
-				Пример простого модального окна
+			<div class="g-hidden">
+				<div class="b-modal" id="exampleModal1">
+					<div class="b-modal_close arcticmodal-close">X</div>
+					Пример простого модального окна
+				</div>
 			</div>
 		</li>
 
@@ -67,9 +72,11 @@
 		<li>
 			<span class="m-dotted" id="example3">Кастомный оверлей</span><br>
 			+ запрет на закрытие при клике по оверлею или нажатию на Escape
-			<div class="b-modal" id="exampleModal3">
-				<div class="b-modal_close arcticmodal-close">X</div>
-				Пример модального окна
+			<div class="g-hidden">
+				<div class="b-modal" id="exampleModal3">
+					<div class="b-modal_close arcticmodal-close">X</div>
+					Пример модального окна
+				</div>
 			</div>
 			<script>
 				$('#example3').click(function() {
@@ -90,9 +97,11 @@
 		<li>
 			<span class="m-dotted" id="example4">Пример событий</span><br>
 			beforeOpen, afterOpen, beforeClose, afterClose
-			<div class="b-modal" id="exampleModal4">
-				<div class="b-modal_close arcticmodal-close">X</div>
-				Пример модального окна
+			<div class="g-hidden">
+				<div class="b-modal" id="exampleModal4">
+					<div class="b-modal_close arcticmodal-close">X</div>
+					Пример модального окна
+				</div>
 			</div>
 			<script>
 				$('#example4').click(function() {
@@ -120,29 +129,31 @@
 
 		<li>
 			<span class="m-dotted example5" data-body="1">Несколько модальных окон</span><br>
-			<div class="b-modal" id="exampleModal5_1">
-				<div class="b-modal_close arcticmodal-close">X</div>
-				<p>
-					Модальное окно #1
-				</p>
-				<p style="text-align: center;">
-					<span class="m-dotted example5" data-body="2">Показать окно #2</span><br>
-				</p>
-			</div>
-			<div class="b-modal" id="exampleModal5_2">
-				<div class="b-modal_close arcticmodal-close">X</div>
-				<p>
-					Модальное окно #2
-				</p>
-				<p style="text-align: center;">
-					<span class="m-dotted example5" data-body="3">Показать окно #3</span><br>
-				</p>
-			</div>
-			<div class="b-modal" id="exampleModal5_3">
-				<div class="b-modal_close arcticmodal-close">X</div>
-				<p>
-					Модальное окно #3
-				</p>
+			<div class="g-hidden">
+				<div class="b-modal" id="exampleModal5_1">
+					<div class="b-modal_close arcticmodal-close">X</div>
+					<p>
+						Модальное окно #1
+					</p>
+					<p style="text-align: center;">
+						<span class="m-dotted example5" data-body="2">Показать окно #2</span><br>
+					</p>
+				</div>
+				<div class="b-modal" id="exampleModal5_2">
+					<div class="b-modal_close arcticmodal-close">X</div>
+					<p>
+						Модальное окно #2
+					</p>
+					<p style="text-align: center;">
+						<span class="m-dotted example5" data-body="3">Показать окно #3</span><br>
+					</p>
+				</div>
+				<div class="b-modal" id="exampleModal5_3">
+					<div class="b-modal_close arcticmodal-close">X</div>
+					<p>
+						Модальное окно #3
+					</p>
+				</div>
 			</div>
 			<script>
 				$('.example5').click(function() {

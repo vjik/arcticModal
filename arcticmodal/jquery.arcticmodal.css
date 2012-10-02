@@ -7,6 +7,6 @@
 .arcticmodal-error { padding: 20px; border-radius: 10px; background: #000; color: #fff; }
 .arcticmodal-loading { width: 80px; height: 80px; border-radius: 10px; background: #000 url(loading.gif) no-repeat 50% 50%; }
 
-.b-modal { position: relative; display: none; width: 500px; padding: 24px; background: #fff; border: 3px solid #bbb; border-radius: 10px; }
+.b-modal { position: relative; width: 500px; padding: 24px; background: #fff; border: 3px solid #bbb; border-radius: 10px; }
 .b-modal_close { position: absolute; right: 12px; top: 6px; font-weight: bold; color: #999; cursor: pointer; }
 .b-modal_close:hover { color: #000; }
