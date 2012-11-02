@@ -264,7 +264,7 @@
 				}
 			} else {
 				return this.each(function() {
-					modal.init_el($(this), options);
+					modal.init_el($(this), $.extend(true, {}, options));
 				});
 			}
 		}
