@@ -68,7 +68,7 @@
 
 
 	var modalID = 0;
-	var modals = $();
+	var modals = $([]);
 
 
 	var utils = {
@@ -155,7 +155,7 @@
 
 			// Запомним настройки
 			$this.data('arcticmodal', D);
-			modals = modals.add($this);
+			modals = $.merge(modals, $this);
 
 			// Показать
 			$.proxy(actions.show, $this)();
