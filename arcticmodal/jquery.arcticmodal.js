@@ -1,7 +1,7 @@
 /*
 
  arcticModal — jQuery plugin
- Version: 0.1
+ Version: 0.3
  Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
  Company: Arctic Laboratory (http://arcticlab.ru/)
 
@@ -110,7 +110,7 @@
 		prepare_body: function(D, $this) {
 
 			// Обработчик закрытия
-			$('.arcticmodal-close', D.body).click(function() {
+			$('.arcticmodal-close', D.body).unbind('click.arcticmodal').bind('click.arcticmodal', function() {
 				$this.arcticmodal('close');
 				return false;
 			});
