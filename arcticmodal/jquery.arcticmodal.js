@@ -91,6 +91,16 @@
 	var modal = {
 
 
+		// Возвращает элемент, которым был вызван плагин
+		getParentEl: function(el) {
+			var r = $(el);
+			if (r.data('arcticmodal')) return r;
+			r = $(el).closest('.arcticmodal-container').data('arcticmodalParentEl');
+			if (r) return r;
+			return false;
+		},
+
+
 		// Переход
 		transition: function(el, action, options, callback) {
 			callback = callback==undefined ? $.noop : callback;
@@ -154,6 +164,7 @@
 				});
 
 			// Запомним настройки
+			D.container.block.data('arcticmodalParentEl', $this);
 			$this.data('arcticmodal', D);
 			modals = $.merge(modals, $this);
 
@@ -278,12 +289,12 @@
 
 		// Показать
 		show: function() {
-			var $this = $(this);
-			var D = $this.data('arcticmodal');
-			if (!D) {
+			var $this = modal.getParentEl(this);
+			if ($this===false) {
 				$.error('jquery.arcticmodal: Uncorrect call');
 				return;
 			}
+			var D = $this.data('arcticmodal');
 
 			// Добавить overlay и container
 			D.overlay.block.hide();
@@ -330,12 +341,12 @@
 				});
 			} else {
 				return this.each(function() {
-					var $this = $(this);
-					var D = $this.data('arcticmodal');
-					if (!D) {
+					var $this = modal.getParentEl(this);
+					if ($this===false) {
 						$.error('jquery.arcticmodal: Uncorrect call');
 						return;
 					}
+					var D = $this.data('arcticmodal');
 
 					// Событие перед закрытием
 					if (D.beforeClose(D, $this)===false) return;
