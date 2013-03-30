@@ -1,7 +1,7 @@
 /*
 
  arcticModal — jQuery plugin
- Version: 0.1
+ Version: 0.3
  Author: Sergey Predvoditelev (sergey.predvoditelev@gmail.com)
  Company: Arctic Laboratory (http://arcticlab.ru/)
 
@@ -68,7 +68,7 @@
 
 
 	var modalID = 0;
-	var modals = $();
+	var modals = $([]);
 
 
 	var utils = {
@@ -91,6 +91,16 @@
 	var modal = {
 
 
+		// Возвращает элемент, которым был вызван плагин
+		getParentEl: function(el) {
+			var r = $(el);
+			if (r.data('arcticmodal')) return r;
+			r = $(el).closest('.arcticmodal-container').data('arcticmodalParentEl');
+			if (r) return r;
+			return false;
+		},
+
+
 		// Переход
 		transition: function(el, action, options, callback) {
 			callback = callback==undefined ? $.noop : callback;
@@ -110,7 +120,7 @@
 		prepare_body: function(D, $this) {
 
 			// Обработчик закрытия
-			$('.arcticmodal-close', D.body).click(function() {
+			$('.arcticmodal-close', D.body).unbind('click.arcticmodal').bind('click.arcticmodal', function() {
 				$this.arcticmodal('close');
 				return false;
 			});
@@ -154,8 +164,9 @@
 				});
 
 			// Запомним настройки
+			D.container.block.data('arcticmodalParentEl', $this);
 			$this.data('arcticmodal', D);
-			modals = modals.add($this);
+			modals = $.merge(modals, $this);
 
 			// Показать
 			$.proxy(actions.show, $this)();
@@ -264,7 +275,7 @@
 				}
 			} else {
 				return this.each(function() {
-					modal.init_el($(this), options);
+					modal.init_el($(this), $.extend(true, {}, options));
 				});
 			}
 		}
@@ -278,12 +289,12 @@
 
 		// Показать
 		show: function() {
-			var $this = $(this);
-			var D = $this.data('arcticmodal');
-			if (!D) {
+			var $this = modal.getParentEl(this);
+			if ($this===false) {
 				$.error('jquery.arcticmodal: Uncorrect call');
 				return;
 			}
+			var D = $this.data('arcticmodal');
 
 			// Добавить overlay и container
 			D.overlay.block.hide();
@@ -330,12 +341,12 @@
 				});
 			} else {
 				return this.each(function() {
-					var $this = $(this);
-					var D = $this.data('arcticmodal');
-					if (!D) {
+					var $this = modal.getParentEl(this);
+					if ($this===false) {
 						$.error('jquery.arcticmodal: Uncorrect call');
 						return;
 					}
+					var D = $this.data('arcticmodal');
 
 					// Событие перед закрытием
 					if (D.beforeClose(D, $this)===false) return;
