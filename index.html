@@ -14,6 +14,9 @@
 	<script src="arcticmodal/jquery.arcticmodal.js"></script>
 	<link rel="stylesheet" href="arcticmodal/jquery.arcticmodal.css">
 
+	<!-- arcticModal theme -->
+	<link rel="stylesheet" href="arcticmodal/themes/simple.css">
+
 </head>
 <body>
 <div class="l-container">
@@ -48,8 +51,8 @@
 		<li>
 			<span class="m-dotted" id="#example1" onclick="$('#exampleModal1').arcticmodal()">Простое модальное окно</span>
 			<div class="g-hidden">
-				<div class="b-modal" id="exampleModal1">
-					<div class="b-modal_close arcticmodal-close">X</div>
+				<div class="box-modal" id="exampleModal1">
+					<div class="box-modal_close arcticmodal-close">закрыть</div>
 					Пример простого модального окна
 				</div>
 			</div>
@@ -59,9 +62,9 @@
 			<span class="m-dotted" id="example2">Окно с большой высотой</span>
 			<script>
 				$('#example2').click(function() {
-					var c = $('<div class="b-modal" />');
+					var c = $('<div class="box-modal" />');
 					c.html($('.b-text').html());
-					c.prepend('<div class="b-modal_close arcticmodal-close">X</div>');
+					c.prepend('<div class="box-modal_close arcticmodal-close">закрыть</div>');
 					$.arcticmodal({
 						content: c
 					});
@@ -73,8 +76,8 @@
 			<span class="m-dotted" id="example3">Кастомный оверлей</span><br>
 			+ запрет на закрытие при клике по оверлею или нажатию на Escape
 			<div class="g-hidden">
-				<div class="b-modal" id="exampleModal3">
-					<div class="b-modal_close arcticmodal-close">X</div>
+				<div class="box-modal" id="exampleModal3">
+					<div class="box-modal_close arcticmodal-close">закрыть</div>
 					Пример модального окна
 				</div>
 			</div>
@@ -98,8 +101,8 @@
 			<span class="m-dotted" id="example4">Пример событий</span><br>
 			beforeOpen, afterOpen, beforeClose, afterClose
 			<div class="g-hidden">
-				<div class="b-modal" id="exampleModal4">
-					<div class="b-modal_close arcticmodal-close">X</div>
+				<div class="box-modal" id="exampleModal4">
+					<div class="box-modal_close arcticmodal-close">закрыть</div>
 					Пример модального окна
 				</div>
 			</div>
@@ -130,8 +133,8 @@
 		<li>
 			<span class="m-dotted example5" data-body="1">Несколько модальных окон</span><br>
 			<div class="g-hidden">
-				<div class="b-modal" id="exampleModal5_1">
-					<div class="b-modal_close arcticmodal-close">X</div>
+				<div class="box-modal" id="exampleModal5_1">
+					<div class="box-modal_close arcticmodal-close">закрыть</div>
 					<p>
 						Модальное окно #1
 					</p>
@@ -139,8 +142,8 @@
 						<span class="m-dotted example5" data-body="2">Показать окно #2</span><br>
 					</p>
 				</div>
-				<div class="b-modal" id="exampleModal5_2">
-					<div class="b-modal_close arcticmodal-close">X</div>
+				<div class="box-modal" id="exampleModal5_2">
+					<div class="box-modal_close arcticmodal-close">закрыть</div>
 					<p>
 						Модальное окно #2
 					</p>
@@ -148,8 +151,8 @@
 						<span class="m-dotted example5" data-body="3">Показать окно #3</span><br>
 					</p>
 				</div>
-				<div class="b-modal" id="exampleModal5_3">
-					<div class="b-modal_close arcticmodal-close">X</div>
+				<div class="box-modal" id="exampleModal5_3">
+					<div class="box-modal_close arcticmodal-close">закрыть</div>
 					<p>
 						Модальное окно #3
 					</p>
@@ -192,7 +195,7 @@
 							cache: false,
 							dataType: 'json',
 							success: function(data, el, responce) {
-								var h = $('<div class="b-modal"><div class="b-modal_close arcticmodal-close">X</div><p><b /></p><p /></div>');
+								var h = $('<div class="box-modal"><div class="box-modal_close arcticmodal-close">закрыть</div><p><b /></p><p /></div>');
 								$('B', h).html(responce.title);
 								$('P:last', h).html(responce.text);
 								data.body.html(h);
