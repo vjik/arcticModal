@@ -194,22 +194,22 @@
 						fn_beforeSend(D, $this);
 					}
 				},
-				success: function(responce) {
+				success: function(response) {
 
 					// Событие после загрузки до показа содержимого
 					$this.trigger('afterLoading');
-					D.afterLoading(D, $this, responce);
+					D.afterLoading(D, $this, response);
 
 					if (fn_success==undefined) {
-						D.body.html(responce);
+						D.body.html(response);
 					} else {
-						fn_success(D, $this, responce);
+						fn_success(D, $this, response);
 					}
 					modal.prepare_body(D, $this);
 
 					// Событие после загрузки после отображения содержимого
 					$this.trigger('afterLoadingOnShow');
-					D.afterLoadingOnShow(D, $this, responce);
+					D.afterLoadingOnShow(D, $this, response);
 
 				},
 				error: function() {

@@ -194,10 +194,10 @@
 							type: 'POST',
 							cache: false,
 							dataType: 'json',
-							success: function(data, el, responce) {
+							success: function(data, el, response) {
 								var h = $('<div class="box-modal"><div class="box-modal_close arcticmodal-close">закрыть</div><p><b /></p><p /></div>');
-								$('B', h).html(responce.title);
-								$('P:last', h).html(responce.text);
+								$('B', h).html(response.title);
+								$('P:last', h).html(response.text);
 								data.body.html(h);
 							}
 						}
