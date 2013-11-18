@@ -198,7 +198,7 @@
 
 					// Событие после загрузки до показа содержимого
 					$this.trigger('afterLoading');
-					D.afterLoading(D, $this, response);
+					response = D.afterLoading(D, $this, response) || response;
 
 					if (fn_success==undefined) {
 						D.body.html(response);
