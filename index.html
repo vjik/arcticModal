@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="arcticmodal/jquery.arcticmodal.css">
 
 	<!-- arcticModal theme -->
-	<link rel="stylesheet" href="arcticmodal/themes/simple.css">
+	<link rel="stylesheet" href="arcticmodal/themes/flat-light.css">
 
 </head>
 <body>
@@ -52,7 +52,7 @@
 			<span class="m-dotted" id="#example1" onclick="$('#exampleModal1').arcticmodal()">Простое модальное окно</span>
 			<div class="g-hidden">
 				<div class="box-modal" id="exampleModal1">
-					<div class="box-modal_close arcticmodal-close">закрыть</div>
+					<div class="box-modal_close arcticmodal-close">&times;</div>
 					Пример простого модального окна
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 				$('#example2').click(function() {
 					var c = $('<div class="box-modal" />');
 					c.html($('.b-text').html());
-					c.prepend('<div class="box-modal_close arcticmodal-close">закрыть</div>');
+					c.prepend('<div class="box-modal_close arcticmodal-close">&times;</div>');
 					$.arcticmodal({
 						content: c
 					});
@@ -77,7 +77,7 @@
 			+ запрет на закрытие при клике по оверлею или нажатию на Escape
 			<div class="g-hidden">
 				<div class="box-modal" id="exampleModal3">
-					<div class="box-modal_close arcticmodal-close">закрыть</div>
+					<div class="box-modal_close arcticmodal-close">&times;</div>
 					Пример модального окна
 				</div>
 			</div>
@@ -102,7 +102,7 @@
 			beforeOpen, afterOpen, beforeClose, afterClose
 			<div class="g-hidden">
 				<div class="box-modal" id="exampleModal4">
-					<div class="box-modal_close arcticmodal-close">закрыть</div>
+					<div class="box-modal_close arcticmodal-close">&times;</div>
 					Пример модального окна
 				</div>
 			</div>
@@ -134,7 +134,7 @@
 			<span class="m-dotted example5" data-body="1">Несколько модальных окон</span><br>
 			<div class="g-hidden">
 				<div class="box-modal" id="exampleModal5_1">
-					<div class="box-modal_close arcticmodal-close">закрыть</div>
+					<div class="box-modal_close arcticmodal-close">&times;</div>
 					<p>
 						Модальное окно #1
 					</p>
@@ -143,7 +143,7 @@
 					</p>
 				</div>
 				<div class="box-modal" id="exampleModal5_2">
-					<div class="box-modal_close arcticmodal-close">закрыть</div>
+					<div class="box-modal_close arcticmodal-close">&times;</div>
 					<p>
 						Модальное окно #2
 					</p>
@@ -152,7 +152,7 @@
 					</p>
 				</div>
 				<div class="box-modal" id="exampleModal5_3">
-					<div class="box-modal_close arcticmodal-close">закрыть</div>
+					<div class="box-modal_close arcticmodal-close">&times;</div>
 					<p>
 						Модальное окно #3
 					</p>
@@ -195,7 +195,7 @@
 							cache: false,
 							dataType: 'json',
 							success: function(data, el, responce) {
-								var h = $('<div class="box-modal"><div class="box-modal_close arcticmodal-close">закрыть</div><p><b /></p><p /></div>');
+								var h = $('<div class="box-modal"><div class="box-modal_close arcticmodal-close">&times;</div><p><b /></p><p /></div>');
 								$('B', h).html(responce.title);
 								$('P:last', h).html(responce.text);
 								data.body.html(h);
