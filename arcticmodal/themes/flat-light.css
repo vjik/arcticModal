@@ -8,5 +8,20 @@
 	box-shadow: 6px 6px 0 #ccc;
 	border: solid 1px #aaa;
 }
-.box-modal_close { position: absolute; right: 10px; top: 6px; font-size: 20px; font-weight: bold; line-height: 15px; color: #999; cursor: pointer; }
+.box-modal_close { 
+	position: absolute; 
+	right: 10px; top: 6px; 
+	font-size: 20px; 
+	font-weight: bold; 
+	line-height: 15px; 
+	color: #999; 
+	cursor: pointer; 
+	border: solid 1px #999;
+	width: 15px;
+	height: 15px;
+	text-align: center;
+}
+.box-modal_close:hover{
+	background: #eee;
+}
 .box-modal_close:hover { color: #666; }

@@ -56,6 +56,8 @@
 			speed: 400
 		},
 
+		draggble: false,
+
 		beforeOpen: $.noop,
 		afterOpen: $.noop,
 		beforeClose: $.noop,
@@ -162,6 +164,12 @@
 					if (utils.isEventOut($('>*', D.body), e))
 						$this.arcticmodal('close');
 				});
+
+			//Таскатель
+			if (D.draggble) {
+				D.body.draggable();
+				D.body.css({"cursor": "move"})
+			}
 
 			// Запомним настройки
 			D.container.block.data('arcticmodalParentEl', $this);
