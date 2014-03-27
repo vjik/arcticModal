@@ -28,7 +28,7 @@
 			block: undefined,
 			tpl: '<div class="arcticmodal-overlay"></div>',
 			css: {
-				backgroundColor: '#000',
+				backgroundColor: '#ccc',
 				opacity: .6
 			}
 		},
@@ -55,6 +55,8 @@
 			type: 'fade',
 			speed: 400
 		},
+
+		draggble: false,
 
 		beforeOpen: $.noop,
 		afterOpen: $.noop,
@@ -162,6 +164,12 @@
 					if (utils.isEventOut($('>*', D.body), e))
 						$this.arcticmodal('close');
 				});
+
+			//Таскатель
+			if (D.draggble) {
+				D.body.draggable();
+				D.body.css({"cursor": "move"})
+			}
 
 			// Запомним настройки
 			D.container.block.data('arcticmodalParentEl', $this);
