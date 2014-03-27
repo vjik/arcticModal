@@ -28,7 +28,7 @@
 			block: undefined,
 			tpl: '<div class="arcticmodal-overlay"></div>',
 			css: {
-				backgroundColor: '#000',
+				backgroundColor: '#ddd',
 				opacity: .6
 			}
 		},
