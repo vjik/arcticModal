@@ -5,7 +5,7 @@
 	background: #fff;
 	color: #3c3c3c;
 	font: 14px/18px Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
-	box-shadow: 4px 4px 0 #ccc;
+	box-shadow: 4px 4px 0 #eaeaea;
 	border: solid 1px #ccc;
 }
 .box-modal_close { position: absolute; right: 10px; top: 6px; font-size: 20px; font-weight: bold; line-height: 15px; color: #999; cursor: pointer; }
