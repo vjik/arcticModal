@@ -5,7 +5,8 @@
 	background: #fff;
 	color: #3c3c3c;
 	font: 14px/18px Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
-	box-shadow: 0 0 0 6px rgba(153, 153, 153, .3);
+	box-shadow: 6px 6px 0 #ccc;
+	border: solid 1px #aaa;
 }
 .box-modal_close { position: absolute; right: 10px; top: 6px; font-size: 20px; font-weight: bold; line-height: 15px; color: #999; cursor: pointer; }
 .box-modal_close:hover { color: #666; }
