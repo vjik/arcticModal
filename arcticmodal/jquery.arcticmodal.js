@@ -200,8 +200,9 @@
 				url: D.url,
 				beforeSend: function() {
 					D.body.html('<div class="arcticmodal-loading" />');
-					if (fn_beforeSend == undefined)
+					if (fn_beforeSend == undefined){
 						fn_beforeSend(D, $this);
+					}
 				},
 				success: function(response) {
 
