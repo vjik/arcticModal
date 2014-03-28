@@ -199,11 +199,9 @@
 			var o = $.extend(true, {
 				url: D.url,
 				beforeSend: function() {
-					if (fn_beforeSend==undefined) {
-						D.body.html('<div class="arcticmodal-loading" />');
-					} else {
+					D.body.html('<div class="arcticmodal-loading" />');
+					if (fn_beforeSend == undefined)
 						fn_beforeSend(D, $this);
-					}
 				},
 				success: function(response) {
 

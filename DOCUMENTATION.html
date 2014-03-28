@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8">
+	<title>arcticModal — Правильные модальные окна</title>	
+</head>
+<body>
+
+<div class="l-container">
+	<div class="l-container_i">
+
+		<!-- Документация -->
+		<div class="b-body b-body-docs">
+
+			<h2>Основные параметры</h2>
+			<table class="b-params">
+				<thead>
+					<tr>
+						<td class="title">Название</td>
+						<td class="default">По-умолчанию</td>
+						<td class="desc">Описание</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="title">type</td>
+						<td class="default">html</td>
+						<td class="desc">Тип содержимого. Поддерживается два значения: <b>html</b> и <b>ajax</b>.</td>
+					</tr>
+					<tr>
+						<td class="title">content</td>
+						<td class="default"><i>пустая строка</i></td>
+						<td class="desc">Содержимое модального окна. Используется при значении <b>type</b> — <b>html</b>.
+						</td>
+					</tr>
+					<tr>
+						<td class="title">url</td>
+						<td class="default"><i>пустая строка</i></td>
+						<td class="desc">Url для загрузки содержимого модального окна. Используется при значении
+							<b>type</b> — <b>ajax</b>.
+						</td>
+					</tr>
+					<tr>
+						<td class="title">ajax</td>
+						<td class="default"><i>пустой объект</i></td>
+						<td class="desc">Параметры ajax-запроса (см.
+							<a href="http://api.jquery.com/jQuery.ajax/">документацию jQuery</a>). Отдельно
+							обрабатываются функции
+							<b>beforeSend</b>, <b>error</b> и <b>success</b>. В функции <b>beforeSend</b>
+							и
+							<b>error</b> передаются два параметра: объект модального окна и элемент, инициализирующий
+							его.
+							В функцию <b>success</b> передаются предыдущие два параметра + ответ сервера.
+						</td>
+					</tr>
+					<tr>
+						<td class="title">closeOnEsc</td>
+						<td class="default">true</td>
+						<td class="desc">Закрывать окно при нажатии на Escape</td>
+					</tr>
+					<tr>
+						<td class="title">closeOnOverlayClick</td>
+						<td class="default">true</td>
+						<td class="desc">Закрывать окно при клике на слой-оверлей</td>
+					</tr>
+					<tr>
+						<td class="title">clone</td>
+						<td class="default">false</td>
+						<td class="desc">Клонировать окно для отображения. Используется вызов jquery-функции <b>.clone(true)</b>.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Параметры оверлея</h2>
+			<p>Настройки слоя-оверлея задаются через параметр <b>overlay</b>.</p>
+			<table class="b-params">
+				<thead>
+					<tr>
+						<td class="title">Название</td>
+						<td class="default">По-умолчанию</td>
+						<td class="desc">Описание</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="title">tpl</td>
+						<td class="default">&lt;div class="arcticmodal-overlay"&gt;&lt;/div&gt;</td>
+						<td class="desc">Шаблон блока</td>
+					</tr>
+					<tr>
+						<td class="title">css</td>
+						<td class="default">{<br>
+							&nbsp; &nbsp; backgroundColor: '#000',<br>
+							&nbsp; &nbsp; opacity: .6<br>
+							}
+						</td>
+						<td class="desc">CSS-свойства блока</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Параметры обработки ошибок</h2>
+			<p>Поддерживается обработка неудачной ajax-загрузки. Свойства задаются через параметр <b>errors</b>.</p>
+			<table class="b-params">
+				<thead>
+					<tr>
+						<td class="title">Название</td>
+						<td class="default">По-умолчанию</td>
+						<td class="desc">Описание</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="title">autoclose_delay</td>
+						<td class="default">2000</td>
+						<td class="desc">Автоматическое закрытие модального окна в случае неудачного ajax-запроса.
+							Указывается время в милисекундах.
+						</td>
+					</tr>
+					<tr>
+						<td class="title">ajax_unsuccessful_load</td>
+						<td class="default">Error</td>
+						<td class="desc">Сообщение о неудачной ajax-запросе</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Анимация открытия/закрытия</h2>
+			<p>
+				Свойства анимации открытия/закрытия модального окна задаются через параметры
+				<b>openEffect</b> и <b>closeEffect</b> соответственно.
+				Поддерживаются следующие свойства:
+			</p>
+			<table class="b-params">
+				<thead>
+					<tr>
+						<td class="title">Название</td>
+						<td class="default">По-умолчанию</td>
+						<td class="desc">Описание</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="title">type</td>
+						<td class="default">fade</td>
+						<td class="desc">Тип анимации: <b>fade</b> или <b>none</b>.</td>
+					</tr>
+					<tr>
+						<td class="title">speed</td>
+						<td class="default">400</td>
+						<td class="desc">Скорость анимации (в миллисекундах)</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Callback-функции и события</h2>
+			<p>Обработка событий возможна как через задание соответствующих функций как параметров, так и через
+				навешивание функции непосредственно на событие.</p>
+			<table class="b-params">
+				<thead>
+					<tr>
+						<td class="title">Функция</td>
+						<td class="desc">Описание</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="title">beforeOpen</td>
+						<td class="desc">Перед открытием окна</td>
+					</tr>
+					<tr>
+						<td class="title">afterOpen</td>
+						<td class="desc">После отображения окна</td>
+					</tr>
+					<tr>
+						<td class="title">beforeClose</td>
+						<td class="desc">Перед закрытием окна. Если функция возвращает
+							<b>false</b>, то закрытие отменяется.
+						</td>
+					</tr>
+					<tr>
+						<td class="title">afterClose</td>
+						<td class="desc">После закрытия окна</td>
+					</tr>
+					<tr>
+						<td class="title">afterLoading</td>
+						<td class="desc">После успешной ajax-загрузки</td>
+					</tr>
+					<tr>
+						<td class="title">afterLoadingOnShow</td>
+						<td class="desc">После отображения окна после успешной ajax-загрузки</td>
+					</tr>
+					<tr>
+						<td class="title">errorLoading</td>
+						<td class="desc">Ошибка ajax-загрузки</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Закрытие окна</h2>
+			<p>
+				Для любого элемента модального окна можно прописать класс <b>arcticmodal-close</b>. При клике
+				по этому элементу окно будет закрыто.
+			</p>
+			<p>
+				Javascript для закрытия конкретного окна:
+			</p>
+			<pre><code class="javascript">$('#exampleModal').arcticmodal('close');</code></pre>
+			<p>где <b>#exampleModal</b> — любой элемент внутри окна или само окно.</p>
+			<p>
+				JavaScript для закрытия всех окон:
+			</p>
+			<pre><code class="javascript">$.arcticmodal('close');</code></pre>
+
+			<h2>Оформление окна (темы)</h2>
+			<p>
+				Оформление окна может быть абсолютно любым. Для примера в дистрибутив включены две темы:
+			</p>
+			<ul>
+				<li><b>simple.css</b> (светлая)</li>
+				<li><b>dark.css</b> (тёмная)</li>
+			</ul>
+			<p>Для использования темы просто подключите соответствующий файл стилей.</p>
+
+			<h2>Установка опций по-умолчанию</h2>
+			<p>
+				Для задания опций, которые будут использоваться по-умолчанию, используется следующий код:
+			</p>
+			<pre><code class="javascript">$.arcticmodal('setDefault', {
+	... опции ...
+});</code></pre>
+
+		</div>
+		<!-- Документация - Конец -->
+
+	</div>
+</div>
+
+
+	<script type="text/javascript">
+		(function(d, w, c) {
+			(w[c] = w[c] || []).push(function() {
+				try {
+					w.yaCounter4338892 = new Ya.Metrika({
+						id: 4338892,
+						webvisor: true,
+						clickmap: true,
+						trackLinks: true});
+				} catch (e) {
+				}
+			});
+			var n = d.getElementsByTagName("script")[0],
+					s = d.createElement("script"),
+					f = function() {
+						n.parentNode.insertBefore(s, n);
+					};
+			s.type = "text/javascript";
+			s.async = true;
+			s.src = (d.location.protocol=="https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+			if (w.opera=="[object Opera]") {
+				d.addEventListener("DOMContentLoaded", f);
+			} else {
+				f();
+			}
+		})(document, window, "yandex_metrika_callbacks");
+	</script>
+	<noscript>
+		<div><img src="//mc.yandex.ru/watch/4338892" style="position:absolute; left:-9999px;" alt="" /></div>
+	</noscript>
+
+
+</body>
+</html>
