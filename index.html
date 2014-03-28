@@ -17,8 +17,9 @@
 	<script src="arcticmodal/jquery.arcticmodal.js"></script>
 	<link rel="stylesheet" href="arcticmodal/jquery.arcticmodal.css">
 
-	<!-- arcticModal theme -->
+	<!-- arcticModal themes -->
 	<link rel="stylesheet" href="arcticmodal/themes/flat-light.css">
+	<link rel="stylesheet" href="arcticmodal/themes/simple.css">
 
 </head>
 <body>
@@ -62,7 +63,7 @@
 		</li>
 
 		<li>
-			<span class="m-dotted" id="exampledragg">Перемещаемое модальное окно</span>
+			<span class="m-dotted" id="exampledragg">Перемещаемое модальное окно c кастомной темой</span>
 			<script>
 				$('#exampledragg').click(function() {
 					var c = $('<div class="box-modal" />');
@@ -70,7 +71,8 @@
 					c.prepend('<div class="box-modal_close arcticmodal-close">&times;</div>');
 					$.arcticmodal({
 						content: c,
-						draggble: true
+						draggble: true,
+						theme: "simple"
 					});
 				});
 			</script>

@@ -18,6 +18,7 @@
 		url: '',
 		ajax: {},
 		ajax_request: null,
+		theme: "flat-light",
 
 		closeOnEsc: true,
 		closeOnOverlayClick: true,
@@ -35,7 +36,7 @@
 
 		container: {
 			block: undefined,
-			tpl: '<div class="arcticmodal-container"><table class="arcticmodal-container_i"><tr><td class="arcticmodal-container_i2"></td></tr></table></div>'
+			tpl: '<div class="arcticmodal-container"><table class="arcticmodal-container_i"><tr><td class="arcticmodal-container_i2 ' + $(this).theme + '"></td></tr></table></div>'
 		},
 
 		wrap: undefined,
@@ -150,9 +151,11 @@
 			D.body = $('.arcticmodal-container_i2', D.container.block);
 			if (options.clone) {
 				D.body.html($this.clone(true));
+				D.body.addClass(D.theme);
 			} else {
 				$this.before('<div id="arcticmodalReserve' + D.modalID + '" style="display: none" />');
 				D.body.html($this);
+				D.body.addClass(D.theme);
 			}
 
 			// Подготовка содержимого

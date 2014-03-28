@@ -1,4 +1,4 @@
-.box-modal {
+.flat-light .box-modal {
 	position: relative;
 	width: 500px;
 	padding: 16px;
@@ -8,7 +8,7 @@
 	box-shadow: 6px 6px 0 #ccc;
 	border: solid 1px #aaa;
 }
-.box-modal_close { 
+.flat-light .box-modal_close { 
 	position: absolute; 
 	right: 10px; top: 6px; 
 	font-size: 20px; 
@@ -21,9 +21,9 @@
 	height: 15px;
 	text-align: center;
 }
-.box-modal_close:hover{
+.flat-light .box-modal_close:hover{
 	background: #eee;
 	box-shadow: 4px 4px 0 #eaeaea;
 	border: solid 1px #ccc;
 }
-.box-modal_close:hover { color: #666; }
+.flat-light .box-modal_close:hover { color: #666; }
