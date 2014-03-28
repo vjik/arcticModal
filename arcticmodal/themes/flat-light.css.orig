@@ -1,0 +1,32 @@
+.box-modal {
+	position: relative;
+	width: 500px;
+	padding: 16px;
+	background: #fff;
+	color: #3c3c3c;
+	font: 14px/18px Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
+<<<<<<< HEAD
+	box-shadow: 4px 4px 0 #eaeaea;
+	border: solid 1px #ccc;
+=======
+	box-shadow: 6px 6px 0 #ccc;
+	border: solid 1px #aaa;
+}
+.box-modal_close { 
+	position: absolute; 
+	right: 10px; top: 6px; 
+	font-size: 20px; 
+	font-weight: bold; 
+	line-height: 15px; 
+	color: #999; 
+	cursor: pointer; 
+	border: solid 1px #999;
+	width: 15px;
+	height: 15px;
+	text-align: center;
+}
+.box-modal_close:hover{
+	background: #eee;
+>>>>>>> dev
+}
+.box-modal_close:hover { color: #666; }
